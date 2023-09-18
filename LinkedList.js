@@ -10,3 +10,8 @@ function LinkedList() {
   this.length = 0;
 }
 
+// size() : 연결 리스트 내 노드 개수 확인
+LinkedList.prototype.size = function() {
+  return LinkedList.length;
+}
+
