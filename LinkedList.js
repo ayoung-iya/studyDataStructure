@@ -11,12 +11,12 @@ function LinkedList() {
 }
 
 // size() : 연결 리스트 내 노드 개수 확인
-LinkedList.prototype.size = function() {
+LinkedList.prototype.size = function () {
   return LinkedList.length;
 }
 
 // isEmpty() : 객체 내 노드 존재 여부 파악
-LinkedList.prototype.isEmpty = function() {
+LinkedList.prototype.isEmpty = function () {
   return LinkedList.length === 0;
 }
 
@@ -26,6 +26,17 @@ LinkedList.prototype.printNode = function () {
     process.stdout.write(`${node.data} -> `)
   }
   console.log('null');
+}
+
+// append() : 연결 리스트 가장 끝에 노드 추가
+LinkedList.prototype.append = function (newData) {
+  const newNode = new Node(newData)
+  for (let node = this.head; ; node = node.next) {
+    if(node.next === null) {
+      node.next = newNode;
+      break;
+    }
+  }
 }
 
 // Test code
@@ -40,4 +51,7 @@ ll.head.next = new Node(456);
 ll.length++;
 console.log(ll);
 
+ll.printNode();
+
+ll.append(789);
 ll.printNode();
