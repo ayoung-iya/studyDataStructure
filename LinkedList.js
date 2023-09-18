@@ -19,3 +19,15 @@ LinkedList.prototype.size = function() {
 LinkedList.prototype.isEmpty = function() {
   return LinkedList.length === 0;
 }
+
+// Test code
+const ll = new LinkedList();
+console.log(ll);
+
+ll.head = new Node(123);
+ll.length++;
+console.log(ll);
+
+ll.head.next = new Node(456);
+ll.length++;
+console.log(ll);
