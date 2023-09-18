@@ -15,3 +15,7 @@ LinkedList.prototype.size = function() {
   return LinkedList.length;
 }
 
+// isEmpty() : 객체 내 노드 존재 여부 파악
+LinkedList.prototype.isEmpty = function() {
+  return LinkedList.length === 0;
+}
