@@ -20,6 +20,14 @@ LinkedList.prototype.isEmpty = function() {
   return LinkedList.length === 0;
 }
 
+// printNode() : 노드 출력
+LinkedList.prototype.printNode = function () {
+  for (let node = this.head; node !== null; node = node.next) {
+    process.stdout.write(`${node.data} -> `)
+  }
+  console.log('null');
+}
+
 // Test code
 const ll = new LinkedList();
 console.log(ll);
@@ -31,3 +39,5 @@ console.log(ll);
 ll.head.next = new Node(456);
 ll.length++;
 console.log(ll);
+
+ll.printNode();
