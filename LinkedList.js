@@ -74,22 +74,27 @@ LinkedList.prototype.insert = function (newData, position = 0) {
 // remove() : value 데이터를 찾아 노드 삭제
 LinkedList.prototype.remove = function (value) {
   let cur = this.head;
-  let pre;
+  let pre = cur;
 
-  if (cur.data === value) {
-    this.head = cur.next;
-    this.length--;
-  } else {
-    while (cur.next !== null) {
-      pre = cur;
-      cur = cur.next;
-
-      if (cur.data === value) {
-        pre.next = cur.next;
-        this.length--;
-      }
-    }
+  // 해당 데이터를 찾을 때가지 순회
+  while (cur.data !== value && cur.next !== null) {
+    pre = cur;
+    cur = cur.next;
   }
+
+  if (cur.data !== value) {
+    return null;
+  }
+
+  if (cur === this.head) {
+    this.head = cur.next;
+  } else {
+    pre.next = cur.next;
+  }
+
+  this.length--;
+
+  return cur.data;
 };
 
 // Test code
