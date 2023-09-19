@@ -136,6 +136,11 @@ LinkedList.prototype.indexOf = function (value) {
   return -1;
 };
 
+// remove2() : indexOf + removeAt = remove
+LinkedList.prototype.remove2 = function (value) {
+  return this.removeAt(this.indexOf(value));
+}
+
 // Test code
 let ll = new LinkedList();
 
@@ -149,3 +154,10 @@ console.log(ll.indexOf(1000));
 console.log(ll.indexOf(1));
 console.log(ll.indexOf(100));
 console.log(ll.indexOf(10));
+
+console.log(ll.remove2(1000));
+ll.printNode();
+console.log(ll.remove2(10));
+ll.printNode();
+console.log(ll.remove2(3));
+ll.printNode();
