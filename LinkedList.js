@@ -138,7 +138,8 @@ LinkedList.prototype.indexOf = function (value) {
 
 // remove2() : indexOf + removeAt = remove
 LinkedList.prototype.remove2 = function (value) {
-  return this.removeAt(this.indexOf(value));
+  const index = this.indexOf(value);
+  return this.removeAt(index);
 }
 
 // Test code
