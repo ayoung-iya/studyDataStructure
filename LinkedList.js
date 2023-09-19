@@ -100,7 +100,7 @@ LinkedList.prototype.remove = function (value) {
 // removeAt() : position 위치 노드 삭제
 LinkedList.prototype.removeAt = function (position = 0) {
   if (position > this.length || position < 0) return null;
-  
+
   let index = 0;
   let cur = this.head;
   let pre;
@@ -121,6 +121,21 @@ LinkedList.prototype.removeAt = function (position = 0) {
   return cur.data;
 };
 
+// indexOf() : value 값을 갖는 노드 위치 반환
+LinkedList.prototype.indexOf = function (value) {
+  let index = 0;
+  let cur = this.head;
+
+  while (cur !== null) {
+    if (cur.data === value) return index;
+
+    index++;
+    cur = cur.next;
+  }
+
+  return -1;
+};
+
 // Test code
 let ll = new LinkedList();
 
@@ -130,12 +145,7 @@ ll.insert(100);
 ll.insert(2, 1);
 ll.insert(3, 3);
 
-console.log(ll.removeAt(1000));
-ll.printNode();
-console.log(ll.removeAt(4));
-ll.printNode();
-console.log(ll.removeAt());
-ll.printNode();
-console.log(ll.removeAt(1));
-ll.printNode();
-console.log(ll.size());
+console.log(ll.indexOf(1000));
+console.log(ll.indexOf(1));
+console.log(ll.indexOf(100));
+console.log(ll.indexOf(10));
