@@ -99,20 +99,20 @@ LinkedList.prototype.remove = function (value) {
 
 // removeAt() : position 위치 노드 삭제
 LinkedList.prototype.removeAt = function (position = 0) {
+  if (position > this.length || position < 0) return null;
+  
   let index = 0;
   let cur = this.head;
-  let pre = cur;
+  let pre;
 
-  if (position > this.length || position < 0) return null;
-
-  while (position !== index++) {
-    pre = cur;
-    cur = cur.next;
-  }
-
-  if (cur === this.head) {
+  if (position === 0) {
     this.head = cur.next;
   } else {
+    while (index++ < position) {
+      pre = cur;
+      cur = cur.next;
+    }
+
     pre.next = cur.next;
   }
 
