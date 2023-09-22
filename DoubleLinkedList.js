@@ -22,19 +22,48 @@ DoubleLinkedList.prototype.isEmpty = function () {
   return this.length === 0;
 };
 
+// printNode(): 노드 정방향 출력
+DoubleLinkedList.prototype.printNode = function () {
+  process.stdout.write("head -> ");
+  for (let node = this.head; node !== null; node = node.next) {
+    process.stdout.write(`${node.data} -> `);
+  }
+  console.log("null");
+};
+
+// printNodeInverse(): 노드 역방향 출력
+DoubleLinkedList.prototype.printNodeInverse = function () {
+  let temp = [];
+
+  process.stdout.write("null <- ");
+  for (let node = this.tail; node !== null; node = node.prev) {
+    temp = [node.data, ...temp];
+  }
+  temp.forEach((data) => process.stdout.write(`${data} <- `));
+  console.log("tail");
+};
+
+// append(): 연결 리스트 가장 끝에 노드 추가
+DoubleLinkedList.prototype.append = function (value) {
+  const node = new Node(value);
+
+  if (this.head === null) {
+    this.head = node;
+    this.tail = node;
+  } else {
+    this.tail.next = node;
+    node.prev = this.tail;
+    this.tail = node;
+  }
+
+  this.length++;
+};
+
 let dll = new DoubleLinkedList();
-let node;
-console.log(dll);
 
-node = new Node(123);
-dll.head = node;
-dll.tail = node;
-dll.length++;
-console.log(dll);
+dll.append(1);
+dll.append(10);
+dll.append(100);
 
-node = new Node(456);
-dll.tail.next = node;
-node.prev = dll.tail;
-dll.tail = node;
-dll.length++;
-console.log(dll);
+dll.printNode();
+dll.printNodeInverse();
