@@ -164,6 +164,26 @@ DoubleLinkedList.prototype.removeAt = function (position = 0) {
   return current.data;
 };
 
+// indexOf(): value 값을 갖는 노드 위치 반환
+DoubleLinkedList.prototype.indexOf = function (value) {
+  let current = this.head;
+  let index = 0;
+
+  while (current !== null) {
+    if (current.data === value) return index;
+
+    index++;
+    current = current.next;
+  }
+
+  return -1;
+};
+
+// remove2(): indexOf + removeAt = remove
+DoubleLinkedList.prototype.remove2 = function (value) {
+  return this.removeAt(this.indexOf(value));
+};
+
 let dll = new DoubleLinkedList();
 
 dll.insert(1);
@@ -174,15 +194,20 @@ dll.insert(3, 3);
 dll.printNode();
 dll.printNodeInverse();
 
-console.log(dll.removeAt(1000));
+console.log(dll.indexOf(1000));
+console.log(dll.indexOf(1));
+console.log(dll.indexOf(100));
+console.log(dll.indexOf(10));
+
+console.log(dll.remove2(1000));
 dll.printNode();
 dll.printNodeInverse();
-console.log(dll.removeAt(4));
+console.log(dll.remove2(1));
 dll.printNode();
 dll.printNodeInverse();
-console.log(dll.removeAt());
+console.log(dll.remove2(2));
 dll.printNode();
 dll.printNodeInverse();
-console.log(dll.removeAt(1));
+console.log(dll.remove2(100));
 dll.printNode();
 dll.printNodeInverse();
