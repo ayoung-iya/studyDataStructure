@@ -133,23 +133,56 @@ DoubleLinkedList.prototype.remove = function (value) {
   return current.data;
 };
 
+// removeAt(): position 위치 노드 삭제
+DoubleLinkedList.prototype.removeAt = function (position = 0) {
+  if (position < 0 || position > this.length) return null;
+
+  let current = this.head;
+  let index = 0;
+  let prev;
+
+  if (position === 0) {
+    this.head = current.next;
+    if (this.length === 1) this.tail = null;
+    else this.head.prev = null;
+  } else if (position === this.length - 1) {
+    current = this.tail;
+    this.tail = current.prev;
+    this.tail.next = null;
+  } else {
+    while (index++ < position) {
+      prev = current;
+      current = current.next;
+    }
+
+    prev.next = current.next;
+    current.next.prev = prev;
+  }
+
+  this.length--;
+
+  return current.data;
+};
+
 let dll = new DoubleLinkedList();
 
 dll.insert(1);
 dll.insert(10);
 dll.insert(100);
+dll.insert(2, 1);
+dll.insert(3, 3);
 dll.printNode();
 dll.printNodeInverse();
 
-console.log(dll.remove(1000));
+console.log(dll.removeAt(1000));
 dll.printNode();
 dll.printNodeInverse();
-console.log(dll.remove(10));
+console.log(dll.removeAt(4));
 dll.printNode();
 dll.printNodeInverse();
-console.log(dll.remove(2));
+console.log(dll.removeAt());
 dll.printNode();
 dll.printNodeInverse();
-console.log(dll.remove(100));
+console.log(dll.removeAt(1));
 dll.printNode();
 dll.printNodeInverse();
