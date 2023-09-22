@@ -100,6 +100,39 @@ DoubleLinkedList.prototype.insert = function (value, position = 0) {
   return true;
 };
 
+// remove(): value 데이터를 찾아 노드 삭제
+DoubleLinkedList.prototype.remove = function (value) {
+  let current = this.head;
+  let prev = current;
+
+  while (current.data !== value && current.next !== null) {
+    prev = current;
+    current = current.next;
+  }
+
+  if (current.data !== value) {
+    return null;
+  }
+
+  if (current === this.head) {
+    this.head = current.next;
+    if (this.length === 1) this.tail = null;
+    else this.head.prev = null;
+  } else if (current === this.tail) {
+    prev.next = null;
+    this.tail = prev;
+    // this.tail = current.prev;
+    // this.tail.next = null;
+  } else {
+    prev.next = current.next;
+    current.next.prev = prev;
+  }
+
+  this.length--;
+
+  return current.data;
+};
+
 let dll = new DoubleLinkedList();
 
 dll.insert(1);
@@ -108,7 +141,15 @@ dll.insert(100);
 dll.printNode();
 dll.printNodeInverse();
 
-dll.insert(2, 1);
-dll.insert(3, 3);
+console.log(dll.remove(1000));
+dll.printNode();
+dll.printNodeInverse();
+console.log(dll.remove(10));
+dll.printNode();
+dll.printNodeInverse();
+console.log(dll.remove(2));
+dll.printNode();
+dll.printNodeInverse();
+console.log(dll.remove(100));
 dll.printNode();
 dll.printNodeInverse();
