@@ -59,11 +59,56 @@ DoubleLinkedList.prototype.append = function (value) {
   this.length++;
 };
 
+// insert(): position 위치에 노드 추가
+DoubleLinkedList.prototype.insert = function (value, position = 0) {
+  if (position < 0 || position > this.length) return false;
+
+  const node = new Node(value);
+  let current = this.head;
+  let index = 0;
+  let prev;
+
+  if (position === 0) {
+    if (this.head === null) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      node.next = current;
+      current.prev = node;
+      this.head = node;
+    }
+  } else if (position === this.length) {
+    current = this.tail;
+    current.next = node;
+    node.prev = current;
+    this.tail = node;
+  } else {
+    while (index++ < position) {
+      prev = current;
+      current = current.next;
+    }
+
+    node.next = current;
+    prev.next = node;
+
+    current.prev = node;
+    node.prev = prev;
+  }
+
+  this.length++;
+
+  return true;
+};
+
 let dll = new DoubleLinkedList();
 
-dll.append(1);
-dll.append(10);
-dll.append(100);
+dll.insert(1);
+dll.insert(10);
+dll.insert(100);
+dll.printNode();
+dll.printNodeInverse();
 
+dll.insert(2, 1);
+dll.insert(3, 3);
 dll.printNode();
 dll.printNodeInverse();
