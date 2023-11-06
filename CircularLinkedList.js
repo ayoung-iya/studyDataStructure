@@ -91,6 +91,36 @@ CircularLinkedList.prototype.insert = function (value, position = 0) {
   return true;
 };
 
+// remove(): value 데이터를 찾아 노드 삭제
+CircularLinkedList.prototype.remove = function (value) {
+  let current = this.head;
+  let prev = current;
+  let data;
+
+  while (current.data !== value && current.next !== this.head) {
+    prev = current;
+    current = current.next;
+  }
+
+  if (current.data !== value) return null;
+
+  data = current.data;
+  if (current === this.head) {
+    while (current.next !== this.head) {
+      current = current.next;
+    }
+
+    this.head = this.head.next;
+    current.next = this.head;
+  } else {
+    prev.next = current.next;
+  }
+
+  this.length--;
+
+  return data;
+};
+
 // Test code
 
 let cll = new CircularLinkedList();
@@ -98,8 +128,15 @@ let cll = new CircularLinkedList();
 cll.insert(1);
 cll.insert(10);
 cll.insert(100);
-cll.printNode();
-
 cll.insert(2, 1);
 cll.insert(3, 3);
+
+console.log(cll.remove(1000));
 cll.printNode();
+console.log(cll.remove(1));
+cll.printNode();
+console.log(cll.remove(2));
+cll.printNode();
+console.log(cll.remove(100));
+cll.printNode();
+console.log(cll.size());
