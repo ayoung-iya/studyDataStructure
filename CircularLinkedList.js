@@ -154,6 +154,25 @@ CircularLinkedList.prototype.removeAt = function (position = 0) {
   return data;
 };
 
+// indexOf(): value 값을 갖는 노드 위치 반환
+CircularLinkedList.prototype.indexOf = function (value) {
+  let current = this.head;
+  let index = 0;
+
+  do {
+    if (current.data === value) return index;
+    index++;
+    current = current.next;
+  } while (current !== this.head);
+
+  return -1;
+};
+
+// remove2(): indexOf + removeAt = remove
+CircularLinkedList.prototype.remove2 = function (value) {
+  return this.removeAt(this.indexOf(value));
+};
+
 // Test code
 
 let cll = new CircularLinkedList();
@@ -164,12 +183,17 @@ cll.insert(100);
 cll.insert(2, 1);
 cll.insert(3, 3);
 
-console.log(cll.removeAt(1000));
+console.log(cll.indexOf(1000));
+console.log(cll.indexOf(1));
+console.log(cll.indexOf(100));
+console.log(cll.indexOf(10));
+
+console.log(cll.remove2(1000));
 cll.printNode();
-console.log(cll.removeAt(1));
+console.log(cll.remove2(1));
 cll.printNode();
-console.log(cll.removeAt(2));
+console.log(cll.remove2(2));
 cll.printNode();
-console.log(cll.removeAt(100));
+console.log(cll.remove2(100));
 cll.printNode();
 console.log(cll.size());
