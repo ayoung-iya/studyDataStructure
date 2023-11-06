@@ -121,6 +121,39 @@ CircularLinkedList.prototype.remove = function (value) {
   return data;
 };
 
+// removeAt(): position 위치 노드 삭제
+CircularLinkedList.prototype.removeAt = function (position = 0) {
+  if (position < 0 || position > this.length) return null;
+
+  let current = this.head;
+  let index = 0;
+  let prev, data;
+
+  if (position === 0) {
+    data = current.data;
+
+    while (current.next !== this.head) {
+      current = current.next;
+    }
+
+    this.head = this.head.next;
+    current.next = this.head;
+  } else {
+    while (index++ < position) {
+      prev = current;
+      current = current.next;
+    }
+
+    data = current.data;
+    
+    prev.next = current.next;
+  }
+
+  this.length--;
+
+  return data;
+};
+
 // Test code
 
 let cll = new CircularLinkedList();
@@ -131,12 +164,12 @@ cll.insert(100);
 cll.insert(2, 1);
 cll.insert(3, 3);
 
-console.log(cll.remove(1000));
+console.log(cll.removeAt(1000));
 cll.printNode();
-console.log(cll.remove(1));
+console.log(cll.removeAt(1));
 cll.printNode();
-console.log(cll.remove(2));
+console.log(cll.removeAt(2));
 cll.printNode();
-console.log(cll.remove(100));
+console.log(cll.removeAt(100));
 cll.printNode();
 console.log(cll.size());
