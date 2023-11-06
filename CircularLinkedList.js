@@ -52,13 +52,54 @@ CircularLinkedList.prototype.append = function (value) {
   this.length++;
 };
 
+// insert(): position 위치에 노드 추가
+CircularLinkedList.prototype.insert = function (value, position = 0) {
+  if (position < 0 || position > this.length) return false;
+  let node = new Node(value);
+  let current = this.head;
+  let index = 0;
+  let prev;
+
+  if (position === 0) {
+    node.next = current;
+    if (this.isEmpty()) {
+      current = node;
+    } else {
+      while (current.next !== this.head) {
+        current = current.next;
+      }
+    }
+
+    this.head = node;
+    current.next = this.head;
+  } else {
+    while (index++ < position) {
+      prev = current;
+      current = current.next;
+    }
+
+    node.next = current;
+    prev.next = node;
+
+    if (node.next === null) {
+      node.next = this.head;
+    }
+  }
+
+  this.length++;
+
+  return true;
+};
+
 // Test code
 
 let cll = new CircularLinkedList();
 
-cll.append(1);
-cll.append(10);
-cll.append(100);
-
+cll.insert(1);
+cll.insert(10);
+cll.insert(100);
 cll.printNode();
-console.log(cll.size());
+
+cll.insert(2, 1);
+cll.insert(3, 3);
+cll.printNode();
