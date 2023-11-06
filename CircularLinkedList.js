@@ -145,7 +145,7 @@ CircularLinkedList.prototype.removeAt = function (position = 0) {
     }
 
     data = current.data;
-    
+
     prev.next = current.next;
   }
 
