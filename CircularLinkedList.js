@@ -20,20 +20,45 @@ CircularLinkedList.prototype.isEmpty = function () {
   return this.length === 0;
 };
 
+// printNode(): 노드 정방향 출력
+CircularLinkedList.prototype.printNode = function () {
+  process.stdout.write("head -> ");
+
+  if (this.length !== 0) {
+    process.stdout.write(`${this.head.data} -> `);
+    for (let node = this.head.next; node !== this.head; node = node.next) {
+      process.stdout.write(`${node.data} -> `);
+    }
+  }
+
+  console.log("null");
+};
+
+// append(): 연결 리스트 가장 끝에 노드 추가
+CircularLinkedList.prototype.append = function (value) {
+  const node = new Node(value);
+  let current = this.head;
+  if (current === null) {
+    this.head = node;
+  } else {
+    while (current.next !== this.head) {
+      current = current.next;
+    }
+    current.next = node;
+  }
+
+  node.next = this.head;
+
+  this.length++;
+};
+
 // Test code
 
 let cll = new CircularLinkedList();
-let node;
-console.log(cll);
 
-node = new Node(123);
-cll.head = node;
-node.next = cll.head;
-cll.length++;
-console.log(cll);
+cll.append(1);
+cll.append(10);
+cll.append(100);
 
-node = new Node(456);
-node.next = cll.head.next;
-cll.head.next = node;
-cll.length++;
-console.log(cll);
+cll.printNode();
+console.log(cll.size());
