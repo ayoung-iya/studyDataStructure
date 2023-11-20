@@ -33,14 +33,28 @@ Stack.prototype.size = function () {
   return this.array.length;
 };
 
+// indexOf: 매개변수로 넘어온 element 위치 확인
+Stack.prototype.indexOf = function (element, position = 0) {
+  for (let i = position; i < this.array.length; i++) {
+    if (element === this.array[i]) return i;
+  }
+
+  return -1;
+};
+
+//includes: 데이터 존재 여부 확인
+Stack.prototype.includes = function (element, position = 0) {
+  for (let i = position; i < this.array.length; i++) {
+    if (element === this.array[i]) return true;
+  }
+
+  return false;
+};
+
 // testCase
 let stack = new Stack([1, 2, 3]);
 
-console.log(stack);
-stack.push(4);
-console.log(stack);
-
-console.log(stack.pop());
-console.log(stack.pop());
-console.log(stack.peek());
-console.log(stack.size());
+console.log(stack.indexOf(1));
+console.log(stack.indexOf(1, 2));
+console.log(stack.includes(1));
+console.log(stack.includes(1, 2));
