@@ -13,12 +13,12 @@ Queue.prototype.isEmpty = function () {
   return !!this.array.length;
 };
 
-//enqueue(): 데이터 추가
+// enqueue(): 데이터 추가
 Queue.prototype.enqueue = function (element) {
   return this.array.push(element);
 };
 
-//dequeue(): 데이터 삭제
+// dequeue(): 데이터 삭제
 Queue.prototype.dequeue = function () {
   return this.array.shift();
 };
