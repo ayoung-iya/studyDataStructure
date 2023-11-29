@@ -1,6 +1,8 @@
 // Queue(): 생성자 함수로 초기 데이터 설정
 function Queue(array) {
   this.array = array ? array : [];
+  this.tail = array ? array.length : 0;
+  this.head = 0;
 }
 
 // getBuffer(): 객체 내 데이터 셋 반환
@@ -15,12 +17,17 @@ Queue.prototype.isEmpty = function () {
 
 // enqueue(): 데이터 추가
 Queue.prototype.enqueue = function (element) {
-  return this.array.push(element);
+  return (this.array[this.tail++] = element);
 };
 
 // dequeue(): 데이터 삭제
 Queue.prototype.dequeue = function () {
-  return this.array.shift();
+  if (this.tail === this.head) return undefined;
+
+  let element = this.array[this.head];
+  delete this.array[this.head++];
+
+  return element;
 };
 
 // front(): 가장 첫 데이터 반환
@@ -39,13 +46,14 @@ Queue.prototype.clear = function () {
 };
 
 //test case
-let queue = new Queue([1, 2, 3, 4]);
+let queue = new Queue([1, 2]);
 
-queue.dequeue();
-console.log(queue.front());
+queue.enqueue(3);
+queue.enqueue(4);
 console.log(queue);
 
-console.log(queue.size());
-queue.clear();
+console.log(queue.dequeue());
+console.log(queue.dequeue());
 console.log(queue);
+
 console.log(queue.size());
