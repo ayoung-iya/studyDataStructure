@@ -13,14 +13,24 @@ Queue.prototype.isEmpty = function () {
   return !!this.array.length;
 };
 
+//enqueue(): 데이터 추가
+Queue.prototype.enqueue = function (element) {
+  return this.array.push(element);
+};
+
+//dequeue(): 데이터 삭제
+Queue.prototype.dequeue = function () {
+  return this.array.shift();
+};
+
 //test case
-let queue = new Queue([1, 2, 3]);
+let queue = new Queue([1, 2]);
 console.log(queue);
 
-let data = queue.getBuffer();
-console.log(data);
-console.log(data === queue.array);
+queue.enqueue(3);
+queue.enqueue(4);
+console.log(queue);
 
-console.log(queue.isEmpty());
-
-console.log(Object.getOwnPropertyDescriptors(Queue.prototype));
+console.log(queue.dequeue());
+console.log(queue.dequeue());
+console.log(queue);
